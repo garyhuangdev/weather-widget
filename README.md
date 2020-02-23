@@ -1,5 +1,26 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## This is a weather widget build with React library, Sass and react-bootstrap
+
+### Assumptions:
+1. this widget has default setting
+2. the value of title-of-widget will be "title of widget" when empty
+3. when turn off the wind it will disappear from the page
+4. Max length of title is 25
+
+### Features
+1. Store the weather data in localStorage if the fetching is successful, so next time the user doesn't need to fetch again.
+2. Build a spinner to reduce FPT, offers better user experience.
+3. Considering this widget does not have many states, use react state for state management rather than redux, keep it simple and concise.
+4. Use eslint and stylelint for code checking to avoid typo and keep code consistence(whitespace, tab and indentation).
+5. Use normalize.css to avoid cross-browser compatibility problems.
+6. Use bootstrap Grid System for fully responsive design.
+7. Provide a theme option for users to switch dark/light theme.
+
+### Todo:
+1. If I have much time, will finish the animation of the presentational component, hoping to achieve a flip card effect when props change.
+2. This widget can also be implemented by React Hooks with Context API, I may consider build another version of it.
+
 ## Available Scripts
 
 In the project directory, you can run:
@@ -26,43 +47,3 @@ The build is minified and the filenames include the hashes.<br />
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
