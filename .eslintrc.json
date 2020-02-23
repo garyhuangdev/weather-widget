@@ -1,0 +1,29 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly"
+  },
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "plugins": ["react"],
+  "rules": {
+    "react/jsx-indent-props": ["error", "tab"],
+    "no-mixed-spaces-and-tabs": [1, "smart-tabs"],
+    "indent": ["error", "tab", { "ignoredNodes": ["JSXElement"] }],
+    "react/jsx-indent": ["error", "tab"],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "semi": ["eror", "always"],
+    "quotes": ["error", "single"],
+    "linebreak-style": ["error", "unix"]
+  }
+}
