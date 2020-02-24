@@ -2,6 +2,12 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## This is a weather widget build with React library, Sass and react-bootstrap
 
+### Install instruction:
+1. cd into weather-widget
+2. run npm install in terminal
+3. run npm run start
+4. get in http://localhost:3000 or http://localhost:3000/weather-widget in your browser
+
 ### Assumptions:
 1. this widget has default setting
 2. the value of title-of-widget will be "title of widget" when empty
@@ -16,6 +22,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 5. Use normalize.css to avoid cross-browser compatibility problems.
 6. Use bootstrap Grid System for fully responsive design.
 7. Provide a theme option for users to switch dark/light theme.
+8. Perform several unit testing cases to ensure function's logic and component structure
 
 ### Todo:
 1. If I have much time, will finish the animation of the presentational component, hoping to achieve a flip card effect when props change.
