@@ -5,12 +5,11 @@
 .container {
   margin: 20px auto;
   padding: 15px;
-  width: 100vw;
   max-width: 700px;
   border-radius: 10px;
 }
 .container .col {
-  max-width: 300px;
+  width: 300px;
 }
 .container .widget-card {
   height: 250px;

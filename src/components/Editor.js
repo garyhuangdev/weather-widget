@@ -2,75 +2,42 @@ import React, { Component } from 'react';
 import Widget from './Widget';
 import { Row, Container, Form, Col } from 'react-bootstrap';
 import Spinner from './Spinner';
-import axios from 'axios';
-import { weatherEndPoint, weatherKey } from '../config/endPoints';
 import { LIGHT_THEME, DARK_THEME } from '../config/constant';
+import { connect } from 'react-redux';
+import {
+  changeTitle,
+  changeWind,
+  changeTemp,
+  getWeather,
+  loadWeather
+} from '../actions/actionCreators';
 
 class Editor extends Component {
-  state = {
-    isLoading: true,
-    theme: LIGHT_THEME,
-    weatherData: '',
-    title: '',
-    temperatureType: 'celsius',
-    windDisplay: 'display'
-  };
-
-  componentDidMount() {
+  async componentDidMount() {
+    const { getWeather, loadWeather } = this.props;
     // check if the data has been stored before or not
     const weatherData = JSON.parse(localStorage.getItem('weatherData'));
-    if (!weatherData) this.getWeather();
-    else this.loadWeather(weatherData);
-  }
-
-  // use callback function to fetch weather data based on the former lat/lon
-  getWeather = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(position => {
-        let lat = position.coords.latitude;
-        let lon = position.coords.longitude;
-        axios
-          .get(
-            `${weatherEndPoint}lat=${lat}&lon=${lon}&units=metric&appid=${weatherKey}`
-          )
-          .then(res => {
-            // remove spinner and store into localStorage after fetching
-            this.setState({ weatherData: res.data, isLoading: false });
-            localStorage.setItem('weatherData', JSON.stringify(res.data));
-          })
-          .catch(() => alert('Error fetching new weather'));
-      });
+    if (!weatherData) {
+      await getWeather();
     } else {
-      alert('Browser does not support Geolocation api');
+      loadWeather(weatherData);
     }
-  };
-
-  // get weather from localStorage
-  loadWeather = weatherData => {
-    this.setState({ weatherData: weatherData, isLoading: false });
-  };
-
-  // handle multiple changes based on event name
-  handleChange(e) {
-    let name = e.target.name;
-    this.setState({ [name]: e.target.value });
-  }
-
-  // change theme
-  handleSwitch(e) {
-    let currentTheme = this.state.theme;
-    let newTheme = currentTheme === LIGHT_THEME ? DARK_THEME : LIGHT_THEME;
-    this.setState({ theme: newTheme });
   }
 
   render() {
-    return this.state.isLoading ? (
+    const {
+      changeTitle,
+      changeWind,
+      changeTemp,
+      weather: { isLoading }
+    } = this.props;
+    return isLoading ? (
       <Spinner />
     ) : (
-      <Container className={`container p-3 m-xs-0 ${this.state.theme}`}>
+      <Container className={`container  p-3 m-xs-0 ${LIGHT_THEME}`}>
         <Row>
           <Col className="col" xs={12} sm={5}>
-            <Form.Group onChange={e => this.handleChange(e)}>
+            <Form.Group onChange={e => changeTitle(e.target.value)}>
               <Form.Label className="h3 m-3 font-weight-bold">Title</Form.Label>
               <Form.Control
                 name="title"
@@ -79,7 +46,10 @@ class Editor extends Component {
                 placeholder="title of widget"
               />
             </Form.Group>
-            <Form.Group className="m-3" onChange={e => this.handleChange(e)}>
+            <Form.Group
+              className="m-3"
+              onChange={e => changeTemp(e.target.value)}
+            >
               <Form.Label className="font-weight-bold">Temperature</Form.Label>
               <Form.Row className="ml-2">
                 <Form.Check
@@ -99,8 +69,10 @@ class Editor extends Component {
                 />
               </Form.Row>
             </Form.Group>
-
-            <Form.Group className="m-3" onChange={e => this.handleChange(e)}>
+            <Form.Group
+              className="m-3"
+              onChange={e => changeWind(e.target.value)}
+            >
               <Form.Label className="font-weight-bold">Wind</Form.Label>
               <Form.Row className="ml-2">
                 <Form.Check
@@ -119,25 +91,27 @@ class Editor extends Component {
                   value="hide"
                 />
               </Form.Row>
-              <Form.Label className="font-weight-bold mt-3  ">
-                Light / Dark theme
-              </Form.Label>
-              <Form.Row className="ml-2">
-                <Form.Check
-                  onChange={e => this.handleSwitch(e)}
-                  type="switch"
-                  id="theme-switch"
-                  label=""
-                />
-              </Form.Row>
             </Form.Group>
           </Col>
           <Col xs={12} sm={7} className="py-5">
-            <Widget data={this.state} />
+            <Widget data={this.props.weather} />
           </Col>
         </Row>
       </Container>
     );
   }
 }
-export default Editor;
+
+const mapStateToProps = state => ({
+  weather: state.weather
+});
+
+const mapDispatchToProps = {
+  changeTitle,
+  changeWind,
+  changeTemp,
+  getWeather,
+  loadWeather
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Editor);

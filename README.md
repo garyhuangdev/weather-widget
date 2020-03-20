@@ -1,20 +1,21 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
 ## This is a weather widget build with React library, Sass and react-bootstrap
 
 ### Install instruction:
+
 1. cd into weather-widget
 2. run npm install in terminal
 3. run npm run start
 4. get in http://localhost:3000 or http://localhost:3000/weather-widget in your browser
 
 ### Assumptions:
+
 1. this widget has default setting
 2. the value of title-of-widget will be "title of widget" when empty
 3. when turn off the wind it will disappear from the page
 4. Max length of title is 25
 
 ### Features
+
 1. Store the weather data in localStorage if the fetching is successful, so next time the user doesn't need to fetch again.
 2. Build a spinner to reduce FPT, offers better user experience.
 3. Considering this widget does not have many states, use react state for state management rather than redux, keep it simple and concise.
@@ -23,10 +24,6 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 6. Use bootstrap Grid System for fully responsive design.
 7. Provide a theme option for users to switch dark/light theme.
 8. Perform several unit testing cases to ensure function's logic and component structure
-
-### Todo:
-1. If I have much time, will finish the animation of the presentational component, hoping to achieve a flip card effect when props change.
-2. This widget can also be implemented by React Hooks with Context API, I may consider build another version of it.
 
 ## Available Scripts
 
