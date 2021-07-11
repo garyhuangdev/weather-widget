@@ -8,7 +8,7 @@ import {
   GEO_NOT_SUPPORTED
 } from './actionTypes';
 import axios from 'axios';
-import { weatherEndPoint, weatherKey } from '../config/endPoints';
+import { weatherEndPoint } from '../config/endPoints';
 
 export const changeTitle = title => dispatch => {
   dispatch({ type: CHANGE_TITLE, payload: title });
@@ -34,7 +34,7 @@ export const getWeather = () => async dispatch => {
         let lon = position.coords.longitude;
         axios
           .get(
-            `${weatherEndPoint}lat=${lat}&lon=${lon}&units=metric&appid=${weatherKey}`
+            `${weatherEndPoint}lat=${lat}&lon=${lon}&units=metric&appid=${process.env.WEATHER_KEY}`
           )
           .then(res => {
             dispatch({ type: GET_WEATHER, payload: res.data });
